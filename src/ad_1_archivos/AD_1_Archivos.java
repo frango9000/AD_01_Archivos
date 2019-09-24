@@ -6,7 +6,9 @@
 package ad_1_archivos;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -48,6 +50,10 @@ public class AD_1_Archivos {
         } else {
             System.out.println(file2.getAbsolutePath() + " ya existe");
         }
+        
+        System.out.println("3");
+        System.out.println(file.getAbsolutePath() +" "+ (file.exists() ? "Si" : "No") + " existe");
+        System.out.println(file2.getAbsolutePath() +" "+ (file.exists() ? "Si" : "No") + " existe");
 
         System.out.println("4");
         File file3 = new File("/home/oracle/NetBeansProjects/AD_01_Archivos/arquivosdir/subdir");
@@ -83,7 +89,13 @@ public class AD_1_Archivos {
 
         System.out.println("6");
         System.out.println(file.getAbsolutePath());
-
+        
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 100; i++) {
+            sb.append(Long.MAX_VALUE);
+        }
+        printOnFile(file2, sb.toString());
+        
         System.out.println("7");
         System.out.println("Nombre: " + file2.getName());
         System.out.println("Ruta: " + file2.getAbsolutePath());
@@ -91,22 +103,27 @@ public class AD_1_Archivos {
         System.out.println("Lectura: " + file2.canRead());
         System.out.println("Tamaño: " + byteSizeFormatter(file2.length() + ""));
 
+        System.out.println("8");
         file2.setReadOnly();
         System.out.println("Escritura: " + file2.canWrite());
 
+        System.out.println("9");
         file2.setWritable(true);
         System.out.println("Escritura: " + file2.canWrite());
 
+        System.out.println("10");
         if (file2.delete()) {
             System.out.println(file2.getAbsolutePath() + " eliminado");
         } else {
             System.out.println(file2.getAbsolutePath() + " no eliminado");
         }
 
-        if (deleteDirectory(file))
+        System.out.println("11");
+        if (deleteDirectory(file)) {
             System.out.println(file.getAbsolutePath() + " eliminado");
-        else
+        } else {
             System.out.println(file.getAbsolutePath() + " no eliminado");
+        }
 
     }
 
@@ -138,5 +155,13 @@ public class AD_1_Archivos {
             }
         }
         return dir.delete();
+    }
+    
+    public static void printOnFile(File file, String string) {
+        try (PrintWriter pw = new PrintWriter(file)) {
+            pw.println(string);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AD_1_Archivos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
