@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ad_1_archivos;
+package AD_01_Archivos;
 
 import java.io.File;
 import java.io.FileNotFoundException;
