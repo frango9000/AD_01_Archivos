@@ -102,7 +102,7 @@ public class NewMain {
         
         try(DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file1)))){
             int written = 0;
-            for (int i = 0; i < 2; i++) {                
+            for (int i = 0; i < 40; i++) {                
                 out.writeUTF("o tempo está xélido");
                 System.out.println(String.format("writeUTF escribiu: %d bytes", out.size() - written));
                 written = out.size();
@@ -115,13 +115,12 @@ public class NewMain {
         try(DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(file1)))){
             int total = in.available();
             int cycle = 1;
-            while (in.available() > 0){
-                
+            while (in.available() > 0){                
                 System.out.print("lemos a "+(cycle++)+" cadea en UTF:");
                 System.out.print(in.readUTF());
                 System.out.print(", numero de bytes lidos: " + (total - in.available()));
                 System.out.println(" bytes restantes: " + in.available());
-                total -= in.available();
+                total -= total - in.available();
             }
         } catch (IOException ex) {
             Logger.getLogger(NewMain.class.getName()).log(Level.SEVERE, null, ex);
