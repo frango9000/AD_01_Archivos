@@ -75,6 +75,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import misc.Res;
 import misc.StopWatch;
 
 /**
@@ -87,8 +88,8 @@ public class NewMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        File file1 = new File("/home/oracle/Desktop/compartido/Netbeans/AD_01_Archivos/src/AD_03_Copybytesimaxe/foto.jpg");
-        File file2 = new File("/home/oracle/Desktop/compartido/Netbeans/AD_01_Archivos/src/AD_03_Copybytesimaxe/foto2.jpg");
+        File file1 = new File(Res.RES_PATH + "foto.jpg");
+        File file2 = new File(Res.RES_PATH + "foto2.jpg");
 
         ejA(file1, file2);
         ejB(file1, file2);

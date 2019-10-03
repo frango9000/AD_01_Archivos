@@ -51,6 +51,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import misc.Res;
 
 /**
  *
@@ -58,8 +59,8 @@ import java.util.logging.Logger;
  */
 public class FileStream {
     public static void main(String[] args) throws IOException {
-        File file1 = new File("/home/oracle/Desktop/compartido/Netbeans/AD_01_Archivos/src/AD_02_FileStream/texto1.txt");
-        File file2 = new File("/home/oracle/Desktop/compartido/Netbeans/AD_01_Archivos/src/AD_02_FileStream/texto2.txt");
+        File file1 = new File(Res.RES_PATH + "texto1.txt");
+        File file2 = new File(Res.RES_PATH + "texto2.txt");
         
         for (int i = 0; i < 2; i++) {
             try(FileInputStream in = new FileInputStream(file1);

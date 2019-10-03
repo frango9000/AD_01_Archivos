@@ -77,6 +77,7 @@ grafico  e comprobaremos a forma en que foron grabadas as  cadeas.
 
 package AD_04_primitiveWriteUTF;
 
+import java.awt.geom.RectangularShape;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
@@ -87,6 +88,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import misc.Res;
 
 /**
  *
@@ -98,7 +100,9 @@ public class NewMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        File file1 = new File("/home/oracle/Desktop/compartido/Netbeans/AD_01_Archivos/src/AD_04_primitiveWriteUTF/texto3.txt");        
+
+        File file1 = new File(Res.RES_PATH + "texto3.txt");
+        System.out.println(file1.getPath());
         
         try(DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file1)))){
             int written = 0;
