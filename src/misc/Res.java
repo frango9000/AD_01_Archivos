@@ -1,8 +1,9 @@
 package misc;
 
-import AD_04_primitiveWriteUTF.NewMain;
+import java.io.File;
+
 
 public class Res {
-    public  static final String RES_PATH = NewMain.class.getResource("/res/").getPath();
+    public  static final String RES_PATH = new File("").getAbsolutePath();
 
 }

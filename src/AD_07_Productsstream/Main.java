@@ -19,7 +19,6 @@ public class Main {
         Product[] productos = {po1, po2};
 
         File file1 = new File(Res.RES_PATH + "productos.txt");
-        System.out.println(file1.getAbsolutePath());
 
         try (DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file1)))) {
             for (Product po : productos) {

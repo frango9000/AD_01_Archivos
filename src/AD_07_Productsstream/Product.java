@@ -1,5 +1,6 @@
 package AD_07_Productsstream;
 
+import java.text.NumberFormat;
 import java.util.StringJoiner;
 
 public class Product {
@@ -49,7 +50,7 @@ public class Product {
         return new StringJoiner(", ", Product.class.getSimpleName() + "[", "]")
             .add("codigo='" + codigo + "'")
             .add("descripcion='" + descripcion + "'")
-            .add("precio=" + precio)
+            .add("precio=" + NumberFormat.getCurrencyInstance(java.util.Locale.GERMANY).format(precio))
             .toString();
     }
 }

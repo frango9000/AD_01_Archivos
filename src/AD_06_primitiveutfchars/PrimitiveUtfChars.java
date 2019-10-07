@@ -72,6 +72,7 @@ public class PrimitiveUtfChars {
 
     public static void main(String[] args) {
         int[] bucles = {2,2,2};
+        System.out.println(new File("").getAbsolutePath());
         File file1 = new File(Res.RES_PATH + "texto6.txt");
         String str = "Está en casa";
         System.out.println("Bucles: " + Arrays.toString(bucles));
