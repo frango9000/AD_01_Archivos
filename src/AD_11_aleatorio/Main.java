@@ -1,5 +1,3 @@
-
-
 /*
 exercicio 11
 aleatorio
