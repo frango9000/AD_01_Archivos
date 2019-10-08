@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import misc.Res;
 
 /**
  *
@@ -24,7 +25,7 @@ public class AD_1_Archivos {
     public static void main(String[] args) {
 
         System.out.println("1");
-        File file = new File("/home/oracle/NetBeansProjects/AD_01_Archivos/arquivosdir");
+        File file = new File(Res.RES_PATH + "/arquivosdir");
         if (!file.exists()) {
             if (file.mkdir()) {
                 System.out.println(file.getAbsolutePath() + " creado correctamente");
