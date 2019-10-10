@@ -1,9 +1,10 @@
 package AD_07_Productsstream;
 
+import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.StringJoiner;
 
-public class Product {
+public class Product implements Serializable {
     private String codigo;
     private String descripcion;
     private double precio;
