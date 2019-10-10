@@ -35,7 +35,7 @@ public class Main {
 
     public static void main(String[] args) {
         String[] cod = {"p1", "p2", "p3"};
-        String[] desc = {"parafusos", "cravos ", "tachas"};
+        String[] desc = {"parafusos", "cravos", "tachas"};
         Double[] prezo = {3.0, 4.0, 5.0};
         ArrayList<Product> products = new ArrayList<>();
         for (int i = 0; i < cod.length; i++) {
