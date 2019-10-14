@@ -34,36 +34,107 @@ package AD_15_XMLproba0ler;
 import static misc.Res.RES_PATH;
 
 import AD_14_XMLproba0.Autor;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        XMLStreamReader in;
+        ArrayList<Autor> autores = getAutorsSAX();
+        for (Autor autor : autores) {
+            System.out.println(autor);
+        }
+        ArrayList<Autor> autores2 = getAutorsDOM();
+        for (Autor autor : autores2) {
+            System.out.println(autor);
+        }
+    }
+
+    private static ArrayList<Autor> getAutorsSAX() {
+        ArrayList<Autor> autores = new ArrayList<>();
+        XMLStreamReader in = null;
         try {
-            in = XMLInputFactory.newInstance().createXMLStreamReader(new FileReader(RES_PATH + "sax0.xml"));
+            in = XMLInputFactory.newInstance().createXMLStreamReader(new FileInputStream(RES_PATH + "sax0.xml"));
+            Autor autor = null;
             while (in.hasNext()) {
                 if (in.getEventType() == XMLStreamConstants.START_ELEMENT) {
+//                    System.out.println(in.getEventType() + " " + in.getLocalName());
                     if (in.getLocalName() == "autor") {
-                        Autor autor = new Autor();
+                        autor = new Autor();
+                        autores.add(autor);
                         autor.setCodigo(in.getAttributeValue(0));
-                        in.next();
+                    } else if (in.getLocalName() == "nombre") {
                         autor.setNombre(in.getElementText());
-                        System.out.println(autor.toString());
+                    } else if (in.getLocalName() == "titulo") {
+                        if (autor.getTitulo1() == null)
+                            autor.setTitulo1(in.getElementText());
+                        else
+                            autor.setTitulo2(in.getElementText());
                     }
                 }
                 in.next();
             }
         } catch (XMLStreamException | FileNotFoundException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                in.close();
+            } catch (XMLStreamException e) {
+                e.printStackTrace();
+            }
         }
-
+        System.out.println("SAX List OK");
+        return autores;
     }
 
+
+    private static ArrayList<Autor> getAutorsDOM() {
+        ArrayList<Autor> autores = new ArrayList<>();
+
+        DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder documentBuilder = null;
+        try {
+            documentBuilder = builderFactory.newDocumentBuilder();
+            Document document = documentBuilder.parse(new FileInputStream(RES_PATH + "dom0.xml"));
+            Element root = document.getDocumentElement();
+            NodeList nodes = root.getChildNodes();
+            for (int i = 0; i < nodes.getLength(); i++) {
+                Node node = nodes.item(i);
+                if (node instanceof Element) {
+                    Element element = (Element) node;
+                    Autor autor = new Autor();
+                    autor.setCodigo(element.getAttribute("codigo"));
+
+                    Element nombre = (Element) element.getElementsByTagName("nombre").item(0);
+                    autor.setNombre(nombre.getTextContent());
+                    NodeList titulos = element.getElementsByTagName("titulo");
+                    Element titulo1 = (Element) titulos.item(0);
+                    autor.setTitulo1(titulo1.getTextContent());
+                    Element titulo2 = (Element) titulos.item(1);
+                    autor.setTitulo2(titulo2.getTextContent());
+
+                    autores.add(autor);
+                }
+            }
+        } catch (ParserConfigurationException | IOException | SAXException e) {
+            e.printStackTrace();
+        }
+        System.out.println("DOM List OK");
+        return autores;
+    }
 }
