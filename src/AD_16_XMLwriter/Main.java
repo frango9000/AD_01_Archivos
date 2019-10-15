@@ -107,18 +107,18 @@ public class Main {
     }
 
     private static Node writeProductDOM(Product product, Document doc) {
-        Element autor = doc.createElement("product");
+        Element product1 = doc.createElement("product");
         Attr codigo = doc.createAttribute("codigo");
         codigo.setValue(product.getCodigo());
-        autor.setAttributeNode(codigo);
+        product1.setAttributeNode(codigo);
 
         Element nombre = doc.createElement("descripcion");
         nombre.appendChild(doc.createTextNode(product.getDescripcion()));
-        autor.appendChild(nombre);
+        product1.appendChild(nombre);
 
         Element precio = doc.createElement("precio");
         precio.appendChild(doc.createTextNode(Double.toString(product.getPrecio())));
-        autor.appendChild(precio);
-        return autor;
+        product1.appendChild(precio);
+        return product1;
     }
 }
