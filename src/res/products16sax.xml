@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<productos>
+  <producto codigo="p1">
+    <descripcion>parafusos</descripcion>
+    <precio>3.0</precio>
+  </producto>
+  <producto codigo="p2">
+    <descripcion>cravos</descripcion>
+    <precio>4.0</precio>
+  </producto>
+  <producto codigo="p3">
+    <descripcion>tachas</descripcion>
+    <precio>5.0</precio>
+  </producto>
+</productos>

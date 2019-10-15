@@ -33,6 +33,8 @@ import misc.Res;
 
 public class Main {
 
+    private static File file1 = new File(Res.RES_PATH + "serial13.txt");
+
     public static void main(String[] args) {
         String[] cod = {"p1", "p2", "p3"};
         String[] desc = {"parafusos", "cravos", "tachas"};
@@ -42,7 +44,6 @@ public class Main {
             products.add(new Product(cod[i], desc[i], prezo[i]));
         }
 
-        File file1 = new File(Res.RES_PATH + "serial13.txt");
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(file1))) {
             for (Product product : products) {
                 outputStream.writeObject(product);
@@ -52,15 +53,24 @@ public class Main {
             e.printStackTrace();
         }
 
+        for (Product product : readProducts()) {
+            System.out.println(product.toString());
+        }
+    }
+
+    public static ArrayList<Product> readProducts() {
+        ArrayList<Product> products = new ArrayList<>();
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file1))) {
             while (true) {
                 Object o = in.readObject();
                 if (o == null)
                     break;
-                System.out.println(o.toString());
+//                System.out.println(o.toString());
+                products.add((Product) o);
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        return products;
     }
 }
